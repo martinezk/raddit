@@ -1,11 +1,18 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :links
+  resources :links do
+    member do
+      put "like", to:    "links#upvote"
+      put "dislike", to: "links#downvote"
+    end
+  end
+  root "links#index"
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root to: 'links#index'
+  # root 'welcome#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
